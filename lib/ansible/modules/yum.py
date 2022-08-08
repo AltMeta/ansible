@@ -146,6 +146,11 @@ options:
     type: bool
     default: "no"
     version_added: "2.4"
+  cve:
+    description:
+      - Specify CVE-ID to patch
+    type: list
+    elements: str
   bugfix:
     description:
       - If set to C(yes), and C(state=latest) then only installs updates that have been marked bugfix related.
@@ -1662,6 +1667,8 @@ class YumModule(YumDnf):
                 self.yum_basecmd.append('--nogpgcheck')
             if self.security:
                 self.yum_basecmd.append('--security')
+            if self.cve:
+                self.yum_basecmd.append('--cve')
             if self.bugfix:
                 self.yum_basecmd.append('--bugfix')
             res = self.latest(pkgs, repoq)

@@ -28,6 +28,7 @@ yumdnf_argument_spec = dict(
         bugfix=dict(required=False, type='bool', default=False),
         cacheonly=dict(type='bool', default=False),
         conf_file=dict(type='str'),
+        cve=dict(type='list', elements='str', default=[]),
         disable_excludes=dict(type='str', default=None),
         disable_gpg_check=dict(type='bool', default=False),
         disable_plugin=dict(type='list', elements='str', default=[]),
@@ -75,6 +76,7 @@ class YumDnf(with_metaclass(ABCMeta, object)):  # type: ignore[misc]
         self.bugfix = self.module.params['bugfix']
         self.cacheonly = self.module.params['cacheonly']
         self.conf_file = self.module.params['conf_file']
+        self.cve = self.module.params['cve']
         self.disable_excludes = self.module.params['disable_excludes']
         self.disable_gpg_check = self.module.params['disable_gpg_check']
         self.disable_plugin = self.module.params['disable_plugin']
